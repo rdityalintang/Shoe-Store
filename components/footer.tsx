@@ -23,13 +23,13 @@ export function Footer() {
               Quality, comfort, and timeless design in every step.
             </p>
             <div className="mt-6 flex items-center gap-4 text-neutral-500">
-              <a href="#" aria-label="Instagram" className="transition-colors duration-200 hover:text-neutral-900">
+              <a href="#social-instagram" aria-label="Instagram" className="transition-colors duration-200 hover:text-neutral-900">
                 <InstagramIcon className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Facebook" className="transition-colors duration-200 hover:text-neutral-900">
+              <a href="#social-facebook" aria-label="Facebook" className="transition-colors duration-200 hover:text-neutral-900">
                 <FacebookIcon className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="Twitter" className="transition-colors duration-200 hover:text-neutral-900">
+              <a href="#social-twitter" aria-label="Twitter" className="transition-colors duration-200 hover:text-neutral-900">
                 <TwitterIcon className="h-5 w-5" />
               </a>
             </div>
@@ -91,12 +91,12 @@ export function Footer() {
             &copy; {new Date().getFullYear()} STRYDE. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-neutral-500">
-            <a href="#" className="transition-colors duration-200 hover:text-neutral-900">
+            <Link href="/privacy" className="transition-colors duration-200 hover:text-neutral-900">
               Privacy Policy
-            </a>
-            <a href="#" className="transition-colors duration-200 hover:text-neutral-900">
+            </Link>
+            <Link href="/terms" className="transition-colors duration-200 hover:text-neutral-900">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

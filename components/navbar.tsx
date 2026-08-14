@@ -52,6 +52,8 @@ export function Navbar() {
       </nav>
 
       <div
+        data-testid="mobile-menu"
+        inert={!isOpen}
         className={`overflow-hidden border-t border-black/5 bg-white transition-[max-height] duration-300 ease-in-out md:hidden ${
           isOpen ? "max-h-96" : "max-h-0"
         }`}

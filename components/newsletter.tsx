@@ -2,12 +2,40 @@
 
 import { useState, type FormEvent } from "react";
 
-export function Newsletter() {
-  const [status, setStatus] = useState<"idle" | "subscribed">("idle");
+type Status = "idle" | "loading" | "success" | "error";
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+export function Newsletter() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("subscribed");
+    const form = event.currentTarget;
+    const email = String(new FormData(form).get("email") ?? "");
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data: { ok: boolean; error?: string } = await response.json();
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again."
+      );
+    }
   }
 
   return (
@@ -21,8 +49,12 @@ export function Newsletter() {
           members-only access.
         </p>
 
-        {status === "subscribed" ? (
-          <p className="mt-8 text-sm font-medium text-accent-light">
+        {status === "success" ? (
+          <p
+            className="mt-8 text-sm font-medium text-accent-light"
+            role="status"
+            aria-live="polite"
+          >
             Thank you for subscribing — welcome to the circle.
           </p>
         ) : (
@@ -35,19 +67,32 @@ export function Newsletter() {
             </label>
             <input
               id="newsletter-email"
+              name="email"
               type="email"
               required
               placeholder="Enter your email"
-              className="w-full rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-sm text-white placeholder-neutral-500 outline-none transition-colors duration-200 focus:border-accent"
+              disabled={status === "loading"}
+              className="w-full rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-sm text-white placeholder-neutral-500 outline-none transition-colors duration-200 focus:border-accent disabled:opacity-60"
             />
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-dark"
+              disabled={status === "loading"}
+              className="shrink-0 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Subscribe
+              {status === "loading" ? "Subscribing…" : "Subscribe"}
             </button>
           </form>
         )}
+
+        {status === "error" ? (
+          <p
+            className="mt-4 text-sm font-medium text-red-400"
+            role="alert"
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </p>
+        ) : null}
       </div>
     </section>
   );
