@@ -3,7 +3,7 @@ import type { Product } from "@/lib/data";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-shadow duration-300 hover:shadow-xl hover:shadow-neutral-900/10">
+    <article className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-neutral-900/10">
       <div className="relative aspect-square overflow-hidden bg-neutral-100">
         <Image
           src={product.image}

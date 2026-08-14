@@ -1,5 +1,6 @@
 import { products } from "@/lib/data";
 import { ProductCard } from "@/components/product-card";
+import { StaggerReveal } from "@/components/motion/stagger-reveal";
 
 export function FeaturedProducts() {
   return (
@@ -17,11 +18,13 @@ export function FeaturedProducts() {
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerReveal className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <div key={product.id} data-reveal-item>
+              <ProductCard product={product} />
+            </div>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

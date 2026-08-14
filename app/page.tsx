@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
+import { PageIntro } from "@/components/motion/page-intro";
 import { FeaturedProducts } from "@/components/featured-products";
 import { Categories } from "@/components/categories";
 import { Features } from "@/components/features";
@@ -11,6 +12,7 @@ import { Footer } from "@/components/footer";
 export default function Home() {
   return (
     <>
+      <PageIntro />
       <Navbar />
       <main>
         <Hero />

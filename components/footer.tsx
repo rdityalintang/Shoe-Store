@@ -8,11 +8,12 @@ import {
   PhoneIcon,
   TwitterIcon,
 } from "@/components/icons";
+import { Reveal } from "@/components/motion/reveal";
 
 export function Footer() {
   return (
     <footer className="bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <Reveal className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="#home" className="text-xl font-semibold tracking-tight text-neutral-900">
@@ -99,7 +100,7 @@ export function Footer() {
             </Link>
           </div>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

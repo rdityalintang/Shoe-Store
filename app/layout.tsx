@@ -24,7 +24,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <noscript>
+          <style>{`[data-intro],[data-reveal-item]{opacity:1 !important;}`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

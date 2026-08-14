@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { testimonials } from "@/lib/data";
 import { StarIcon } from "@/components/icons";
+import { StaggerReveal } from "@/components/motion/stagger-reveal";
 
 export function Testimonials() {
   return (
@@ -15,11 +16,12 @@ export function Testimonials() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <StaggerReveal className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3" staggerMs={80}>
           {testimonials.map((testimonial) => (
             <figure
               key={testimonial.id}
-              className="flex flex-col rounded-2xl border border-neutral-200 bg-white p-7 transition-shadow duration-300 hover:shadow-lg hover:shadow-neutral-900/5"
+              data-reveal-item
+              className="flex flex-col rounded-2xl border border-neutral-200 bg-white p-7 transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-900/5"
             >
               <div className="flex items-center gap-0.5 text-accent">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -48,7 +50,7 @@ export function Testimonials() {
               </figcaption>
             </figure>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

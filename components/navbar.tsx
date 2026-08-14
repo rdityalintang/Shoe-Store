@@ -4,12 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "@/lib/data";
 import { CloseIcon, MenuIcon } from "@/components/icons";
+import { CtaLink } from "@/components/motion/cta-link";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md">
+    <header
+      data-intro="navbar"
+      className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md"
+    >
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link
           href="#home"
@@ -23,7 +27,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-neutral-600 transition-colors duration-200 hover:text-neutral-900"
+                className="relative text-sm font-medium text-neutral-600 transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-neutral-900 after:transition-transform after:duration-300 hover:text-neutral-900 hover:after:scale-x-100 focus-visible:text-neutral-900 focus-visible:after:scale-x-100"
               >
                 {link.label}
               </Link>
@@ -32,12 +36,12 @@ export function Navbar() {
         </ul>
 
         <div className="hidden md:block">
-          <Link
+          <CtaLink
             href="#collection"
             className="inline-flex items-center rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent"
           >
             Shop Now
-          </Link>
+          </CtaLink>
         </div>
 
         <button
@@ -71,13 +75,13 @@ export function Navbar() {
             </li>
           ))}
           <li className="pt-2">
-            <Link
+            <CtaLink
               href="#collection"
               onClick={() => setIsOpen(false)}
               className="inline-flex w-full items-center justify-center rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white"
             >
               Shop Now
-            </Link>
+            </CtaLink>
           </li>
         </ul>
       </div>

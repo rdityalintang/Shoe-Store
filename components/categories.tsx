@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { categories } from "@/lib/data";
 import { ArrowRightIcon } from "@/components/icons";
+import { StaggerReveal } from "@/components/motion/stagger-reveal";
 
 export function Categories() {
   return (
@@ -16,11 +17,15 @@ export function Categories() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerReveal
+          className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          scale={0.96}
+        >
           {categories.map((category) => (
             <Link
               key={category.id}
               href="#collection"
+              data-reveal-item
               className="group relative flex aspect-[4/5] items-end overflow-hidden rounded-2xl bg-neutral-900"
             >
               <Image
@@ -35,17 +40,17 @@ export function Categories() {
                 <h3 className="text-2xl font-semibold text-white">
                   {category.name}
                 </h3>
-                <p className="mt-1 text-sm text-white/80">
+                <p className="mt-1 translate-y-0.5 text-sm text-white/80 opacity-90 transition-[transform,opacity] duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   {category.description}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white">
+                <span className="mt-4 inline-flex translate-y-0.5 items-center gap-1.5 text-sm font-medium text-white opacity-90 transition-[transform,opacity] duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   Explore
                   <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );
